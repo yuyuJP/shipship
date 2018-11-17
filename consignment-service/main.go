@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	pb "shipship/consignment-service/proto/consignment"
+	pb "github.com/yuyuJP/shipship/consignment-service/proto/consignment"
 
 	micro "github.com/micro/go-micro"
 

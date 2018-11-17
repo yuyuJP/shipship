@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	pb "shipship/consignment-service/proto/consignment"
+	pb "github.com/yuyuJP/shipship/consignment-service/proto/consignment"
 
 	"golang.org/x/net/context"
 
