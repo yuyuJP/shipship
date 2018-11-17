@@ -17,6 +17,6 @@ RUN apk --no-cache add ca-certificates
 RUN mkdir /app
 WORKDIR /app
 
-COPY --from=builder /go/src/github.com/yuyuJP/shipship/consignment-service/vessel-service .
+COPY --from=builder /go/src/github.com/yuyuJP/shipship/vessel-service/vessel-service .
 
 CMD ["./vessel-service"]
