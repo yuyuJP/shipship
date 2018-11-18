@@ -31,6 +31,10 @@ func (repo *ConsignmentRepository) GetAll() ([]*pb.Consignment, error) {
 	return consignments, err
 }
 
+func (repo *ConsignmentRepository) Close() {
+	repo.session.Clone()
+}
+
 func (repo *ConsignmentRepository) collection() *mgo.Collection {
 	return repo.session.DB(dbName).C(consignmentCollection)
 }
