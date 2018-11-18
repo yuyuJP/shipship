@@ -3,20 +3,23 @@ package main
 import (
 	"log"
 
+	"gopkg.in/mgo.v2"
+
 	pb "github.com/yuyuJP/shipship/consignment-service/proto/consignment"
 	vesselProto "github.com/yuyuJP/shipship/vessel-service/proto/vessel"
 	"golang.org/x/net/context"
 )
 
-type handler struct {
+type service struct {
+	session      *mgo.Session
 	vesselClient vesselProto.VesselServiceClient
 }
 
-func (s *handler) GetRepo() Repository {
+func (s *service) GetRepo() Repository {
 	return &ConsignmentRepository{s.session.Clone()}
 }
 
-func (s *handler) CreateConsignment(ctx context.Context, req *pb.Consignment, res *pb.Response) error {
+func (s *service) CreateConsignment(ctx context.Context, req *pb.Consignment, res *pb.Response) error {
 	repo := s.GetRepo()
 	defer repo.Close()
 
@@ -41,7 +44,7 @@ func (s *handler) CreateConsignment(ctx context.Context, req *pb.Consignment, re
 	return nil
 }
 
-func (s *handler) GetConsignments(ctx context.Context, req *pb.GetRequest, res *pb.Response) error {
+func (s *service) GetConsignments(ctx context.Context, req *pb.GetRequest, res *pb.Response) error {
 	repo := s.GetRepo()
 	defer repo.Close()
 	consignments, err := repo.GetAll()

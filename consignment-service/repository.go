@@ -1,4 +1,4 @@
-package make
+package main
 
 import (
 	pb "github.com/yuyuJP/shipship/consignment-service/proto/consignment"
@@ -27,7 +27,7 @@ func (repo *ConsignmentRepository) Create(consignment *pb.Consignment) error {
 func (repo *ConsignmentRepository) GetAll() ([]*pb.Consignment, error) {
 	var consignments []*pb.Consignment
 
-	err := repo.collection.Find(nil).All(&consignments)
+	err := repo.collection().Find(nil).All(&consignments)
 	return consignments, err
 }
 
